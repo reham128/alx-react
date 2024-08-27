@@ -9,5 +9,5 @@ li[data='default'] {
 }
 
 li[data='urgent'] {
-  color: rgb(238, 24, 24);
+  color: red;
 }
