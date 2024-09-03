@@ -1,37 +1,43 @@
 import React from 'react';
-import CourseListRow from './CourseListRow';
 import './CourseList.css';
+import CourseListRow from './CourseListRow';
 
-const CourseListRowHead = [
+const courseListHeaders = [
   { cellOne: 'Available courses', cellTwo: null, isHeader: true },
   { cellOne: 'Course name', cellTwo: 'Credit', isHeader: true },
 ];
 
-const CourseList = ({ listCourses }) => {
+const CourseList = ({ listCourses = [] }) => {
+  const renderHeaderRows = () =>
+    courseListHeaders.map((header, idx) => (
+      <CourseListRow
+        key={idx}
+        textFirstCell={header.cellOne}
+        textSecondCell={header.cellTwo}
+        isHeader={header.isHeader}
+      />
+    ));
+
+  const renderCourseRows = () =>
+    listCourses.length > 0 ? (
+      listCourses.map(({ id, name, credit }) => (
+        <CourseListRow
+          key={id}
+          textFirstCell={name}
+          textSecondCell={credit}
+        />
+      ))
+    ) : (
+      <CourseListRow textFirstCell='No course available yet' />
+    );
+
   return (
     <table id='CourseList'>
       <thead>
-        {CourseListRowHead.map((course, idx) => (
-          <CourseListRow
-            key={idx}
-            textFirstCell={course.cellOne}
-            textSecondCell={course.cellTwo}
-            isHeader={course.isHeader}
-          />
-        ))}
+        {renderHeaderRows()}
       </thead>
       <tbody>
-        {listCourses?.length ? (
-          listCourses.map(({ id, name, credit }) => (
-            <CourseListRow
-              key={id}
-              textFirstCell={name}
-              textSecondCell={credit}
-            />
-          ))
-        ) : (
-          <CourseListRow textFirstCell='No course available yet' />
-        )}
+        {renderCourseRows()}
       </tbody>
     </table>
   );
