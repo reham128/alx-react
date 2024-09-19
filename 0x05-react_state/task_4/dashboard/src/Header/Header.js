@@ -1,6 +1,8 @@
 import React from "react";
-import logo from "../assets/holberton-logo.jpg";
+import { Component } from "react";
+import Logo from '../assets/holberton-logo.jpg';
 import { StyleSheet, css } from 'aphrodite';
+import { AppContext } from '../App/AppContext';
 
 const styles = StyleSheet.create({
   "App-header": {
@@ -18,15 +20,28 @@ const styles = StyleSheet.create({
   },
 });
 
-function Header() {
-  return (
-    <>
-      <div className={css(styles["App-header"])}>
-        <img src={logo} className={css(styles.img)} alt="logo" />
+class Header extends Component {
+  static contextType = AppContext;
+
+  render() {
+    const { user, logOut } = this.context;
+    return (
+      <div className={css(styles['App-header'])}>
+        <img src={Logo} className={css(styles['App-logo'])} alt='logo' />
         <h1>School dashboard</h1>
+        {user?.isLoggedIn && (
+          <section id='logoutSection'>
+            Welcome {user.email} (
+            <a href='#' onClick={logOut}>
+              logout
+            </a>
+            )
+          </section>
+        )}
       </div>
-    </>
-  );
+    );
+  }
 }
+
 
 export default Header;

@@ -41,30 +41,34 @@ class Login extends Component {
       enableSubmit: false,
     };
 
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-  }
-
-  handleChangeEmail(event) {
-    const email = event.target.value;
-    this.setState({ email }, this.checkEnableSubmit);
-  }
-
-  handleChangePassword(event) {
-    const password = event.target.value;
-    this.setState({ password }, this.checkEnableSubmit);
-  }
-
-  checkEnableSubmit() {
-    const { email, password } = this.state;
-    const enableSubmit = email !== "" && password !== "";
-    this.setState({ enableSubmit });
+    this.updateSubmitButtonState = this.updateSubmitButtonState.bind(this);
   }
 
   handleLoginSubmit(event) {
     event.preventDefault();
-    this.setState({ isLoggedIn: true });
+    const { logIn } = this.props;
+    const { email, password } = this.state;
+    logIn(email, password);
+  }
+
+  handleChangeEmail(event) {
+    this.setState({ email: event.target.value }, this.updateSubmitButtonState);
+  }
+
+  handleChangePassword(event) {
+    this.setState(
+      { password: event.target.value },
+      this.updateSubmitButtonState
+    );
+  }
+
+  updateSubmitButtonState() {
+    const { email, password } = this.state;
+    const enableSubmit = email !== '' && password !== '';
+    this.setState({ enableSubmit });
   }
 
   render() {
