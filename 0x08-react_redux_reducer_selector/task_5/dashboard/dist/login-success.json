@@ -1,0 +1,8 @@
+{
+  "user": {
+    "id": "1",
+    "email": "user@example.com",
+    "name": "John Doe"
+  },
+  "token": "sample-auth-token"
+}
