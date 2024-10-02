@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.4e8581fe.css","mappings":"AAAA,YAIE,gBAAiB,CAHjB,iBAAkB,CAElB,uBAA0B,CAD1B,iBAGF","sources":["Footer/Footer.css"],"sourcesContent":[".App-footer {\n  font-style: italic;\n  text-align: center;\n  padding: 1.4rem 0 1.2rem 0;\n  font-size: 1.2rem;\n}"],"names":[],"sourceRoot":""}
